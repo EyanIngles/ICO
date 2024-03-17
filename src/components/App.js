@@ -7,6 +7,7 @@ import TOKEN_ABI from '../abi/Token.json';
 import CROWDSALE_ABI from '../abi/Crowdsale.json';
 import config from '../config.json';
 import Loading from './Loading';
+import Progress from './Progress';
 
 function App() {
 
@@ -58,12 +59,12 @@ function App() {
     return(
         <Container>
             <Navigation></Navigation>
-
+            <h1 className="text-center my-5"> Introducing Ease DAPP!</h1>
         {isLoading ? (
         <Loading/>
         ) : (<>
             <p className='text-center'><strong>Current Price:</strong> {price} ETH</p>
-            <p className="text-center my-3">{tokensSold} / {maxTokens}</p>
+            <Progress maxTokens={maxTokens} tokensSold={tokensSold}/>
             </>)}
             
             <hr></hr>
