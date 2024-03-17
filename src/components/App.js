@@ -8,6 +8,8 @@ import CROWDSALE_ABI from '../abi/Crowdsale.json';
 import config from '../config.json';
 import Loading from './Loading';
 import Progress from './Progress';
+import Buy from './Buy';
+
 
 function App() {
 
@@ -64,6 +66,7 @@ function App() {
         <Loading/>
         ) : (<>
             <p className='text-center'><strong>Current Price:</strong> {price} ETH</p>
+            <Buy provider={provider} price={price} crowdsale={crowdsale} setIsLoading={setIsLoading} />
             <Progress maxTokens={maxTokens} tokensSold={tokensSold}/>
             </>)}
             
