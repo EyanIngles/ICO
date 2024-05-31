@@ -23,8 +23,6 @@ function App() {
     const [maxTokens, setMaxTokens] = useState(0)
     const [tokensSold, setTokensSold] = useState(0)
 
-
-
     const loadBlockchainData = async () => {
 
         const provider = new ethers.providers.Web3Provider(window.ethereum)
@@ -69,7 +67,6 @@ function App() {
             <Buy provider={provider} price={price} crowdsale={crowdsale} setIsLoading={setIsLoading} />
             <Progress maxTokens={maxTokens} tokensSold={tokensSold}/>
             </>)}
-            
             <hr></hr>
 
             {account && (

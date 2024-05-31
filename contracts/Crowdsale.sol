@@ -9,7 +9,9 @@ contract Crowdsale {
     uint256 public price;
     uint256 public maxTokens;
     uint256 public tokensSold;
-    
+    uint256 public Tokendeployment;
+    uint256 public readTimestampNow;
+
     event Buy(uint256 amount, address buyer);
     event Finalise(uint256 tokenSold, uint256 ethRaised);
 
@@ -29,17 +31,26 @@ contract Crowdsale {
         uint256 amount = msg.value / price;
         buyTokens(amount*1e18);
     }
-    
+
+    function setDeployment(uint256 _setDeployment) public {
+        _setDeployment = Tokendeployment;
+       Tokendeployment = block.timestamp;
+    }
+
+    function readTimestamp() public {
+        readTimestampNow = block.timestamp;
+    }
     function buyTokens(uint256 _amount) public payable {
+        require(readTimestampNow <= Tokendeployment);
         require(msg.value == (_amount / 1e18) * price);
         require(token.balanceOf(address(this)) >= _amount);
         require(token.transfer(msg.sender, _amount));
-        
+
         tokensSold += _amount;
 
         emit Buy(_amount, msg.sender);
     }
-    
+
     function setPrice(uint256 _price) public onlyOwner {
         price = _price;
     }
@@ -49,7 +60,7 @@ contract Crowdsale {
         uint256 value =address(this).balance;
         (bool sent, ) = owner.call{ value: value }("");
         require(sent);
-        
+
 
         emit Finalise(tokensSold, value);
     }

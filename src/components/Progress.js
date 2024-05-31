@@ -7,6 +7,6 @@ const Progress = ({ maxTokens, tokensSold }) => {
         <p className="text-center my-3"> {tokensSold} / {maxTokens} Tokens Sold</p>
         </div>
     )
-}   
+}
 
 export default Progress;

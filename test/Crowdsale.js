@@ -7,7 +7,7 @@ const tokens = (n) => {
 const ether = tokens
 
 describe ("Crowdsale", () => {
-    let crowdsale, deployer, user1, transaction
+    let crowdsale, deployer, user1, transaction, token
     beforeEach( async () => {
 
         const Crowdsale = await ethers.getContractFactory("Crowdsale")
@@ -27,8 +27,10 @@ describe ("Crowdsale", () => {
 describe("deployment", async () =>{
     it("sends tokens to the crowdsale contract", async () => {
         expect(await token.balanceOf(crowdsale.address)).to.equal(tokens(1000000))
+        console.log(token.address)
+        console.log(crowdsale.address)
+        console.log(tokens(10))
     })
-    
     it("returns token address", async () =>  {
         expect(await crowdsale.token()).to.equal(token.address)
     })
@@ -43,9 +45,8 @@ describe("Buying tokens", () => {
     describe("Success", () =>{
         beforeEach( async () => {
             transaction = await crowdsale.connect(user1).buyTokens(amount, { value: ether(10) })
-            result = await transaction.wait() 
+            result = await transaction.wait()
         })
-    
         it("transfers tokens", async () =>  {
             expect(await token.balanceOf(crowdsale.address)).to.equal(tokens(999990))
             expect(await token.balanceOf(user1.address)).to.equal(amount)

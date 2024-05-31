@@ -26,7 +26,6 @@ const Buy = ({ provider, price, crowdsale, setIsLoading }) =>{
         }   catch {
             window.alert("User rejected or transaction reverted")
         }
-       
         setIsLoading(true)
     }
 
@@ -40,7 +39,6 @@ const Buy = ({ provider, price, crowdsale, setIsLoading }) =>{
                 </Col>
                 <Col className='text-center'>
                     {isWaiting ? (<Spinner animation='border'></Spinner>) : (<Button variant='primary' type='submit' style={{width:'100%'}}>Buy Tokens</Button>)}
-                
                 </Col>
             </Form.Group>
         </Form>
