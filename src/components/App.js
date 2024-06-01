@@ -28,8 +28,8 @@ function App() {
         const provider = new ethers.providers.Web3Provider(window.ethereum)
         setProvider(provider)
 
-        const token = new ethers.Contract(config[31337].token.address,TOKEN_ABI, provider)
-        const crowdsale = new ethers.Contract(config[31337].crowdsale.address,CROWDSALE_ABI, provider)
+        const token = new ethers.Contract(config[11155111].token.address,TOKEN_ABI, provider)
+        const crowdsale = new ethers.Contract(config[11155111].crowdsale.address,CROWDSALE_ABI, provider)
         setCrowdsale(crowdsale)
 
         const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
@@ -69,8 +69,10 @@ function App() {
             </>)}
             <hr></hr>
 
-            {account && (
-                <Info account={account} accountBalance={accountBalance}></Info>
+            {account && (<>
+                <Info account={account} accountBalance={accountBalance}></Info><hr/>
+                <p>Import the token you purchased by using our Token Address: '0x6E9CEfF7df8e26c3735EC6ed344De34E54d20C97' on the Sepolia testNet.</p>
+                </>
             )}
         </Container>
 
